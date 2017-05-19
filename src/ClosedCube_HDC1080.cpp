@@ -92,7 +92,7 @@ float ClosedCube_HDC1080::readT() {
 
 float ClosedCube_HDC1080::readTemperature() {
 	uint16_t rawT = readData(TEMPERATURE);
-	return (rawT / pow(2, 16)) * 165 - 40;
+	return ((rawT / pow(2, 16)) * 165) - 40;
 }
 
 float ClosedCube_HDC1080::readH() {
