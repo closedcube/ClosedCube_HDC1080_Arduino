@@ -35,10 +35,19 @@ THE SOFTWARE.
 
 ClosedCube_HDC1080::ClosedCube_HDC1080()
 {
+	_lastError = 0;
+}
+
+uint8_t ClosedCube_HDC1080::GetLastError()
+{
+	uint8_t res = _lastError;
+	_lastError = 0;
+	return res;
 }
 
 void ClosedCube_HDC1080::begin(uint8_t address) {
 	_address = address;
+	_lastError = 0;
 	Wire.begin();
 
 	setResolution(HDC1080_RESOLUTION_14BIT, HDC1080_RESOLUTION_14BIT);
@@ -86,15 +95,23 @@ void ClosedCube_HDC1080::writeRegister(HDC1080_Registers reg) {
 	Wire.write(HDC1080_CONFIGURATION);
 	Wire.write(reg.rawData);
 	Wire.write(0x00);
-	Wire.endTransmission();
+	uint8_t res = Wire.endTransmission();
+	if (res != 0) {
+		_lastError = res;
+	}	
 	delay(10);
 }
 
 void ClosedCube_HDC1080::heatUp(uint8_t seconds) {
+	GetLastError();
+	
 	HDC1080_Registers reg = readRegister();
 	reg.Heater = 1;
 	reg.ModeOfAcquisition = 1;
 	writeRegister(reg);
+	
+	if (_lastError) 
+		return;
 
 	uint8_t buf[4];
 	for (int i = 1; i < (seconds*66); i++) {
@@ -138,12 +155,22 @@ uint16_t ClosedCube_HDC1080::readDeviceId() {
 }
 
 uint16_t ClosedCube_HDC1080::readData(uint8_t pointer) {
+	uint8_t res;
 	Wire.beginTransmission(_address);
 	Wire.write(pointer);
-	Wire.endTransmission();
+	res = Wire.endTransmission();
+	if (res != 0) {
+		_lastError = res;
+		return 0;
+	}	
 	
 	delay(9);
-	Wire.requestFrom(_address, (uint8_t)2);
+	res = Wire.requestFrom(_address, (uint8_t)2);
+	
+	if (res != 2) {
+		_lastError = 100;
+		return 0;
+	}
 
 	byte msb = Wire.read();
 	byte lsb = Wire.read();
