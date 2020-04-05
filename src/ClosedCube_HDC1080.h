@@ -75,6 +75,8 @@ typedef union {
 class ClosedCube_HDC1080 {
 public:
 	ClosedCube_HDC1080();
+	
+	uint8_t GetLastError();
 
 	void begin(uint8_t address);
 	uint16_t readManufacturerId(); // 0x5449 ID of Texas Instruments
@@ -96,6 +98,7 @@ public:
 	double readH(); // short-cut for readHumidity
 
 private:
+	uint8_t _lastError;
 	uint8_t _address;
 	uint16_t readData(uint8_t pointer);
 	
