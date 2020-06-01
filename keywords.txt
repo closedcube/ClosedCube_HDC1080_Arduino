@@ -12,20 +12,20 @@ ClosedCube_HDC1080	KEYWORD1
 # Methods and Functions (KEYWORD2)
 ##################################################################
 
-begin KEYWORD2
-readManufacturerID KEYWORD2
-readDeviceID KEYWORD2
+begin	KEYWORD2
+readManufacturerID	KEYWORD2
+readDeviceID	KEYWORD2
 
-readTemperature KEYWORD2
-readHumidity KEYWORD2
+readTemperature	KEYWORD2
+readHumidity	KEYWORD2
 
-readT KEYWORD2
-readH KEYWORD2
+readT	KEYWORD2
+readH	KEYWORD2
 
-readRegister KEYWORD2
-writeRegister KEYWORD2
+readRegister	KEYWORD2
+writeRegister	KEYWORD2
 
-heatUp KEYWORD2
+heatUp	KEYWORD2
 
-readSerialNumber KEYWORD2
-setResolution KEYWORD2
+readSerialNumber	KEYWORD2
+setResolution	KEYWORD2
