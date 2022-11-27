@@ -163,7 +163,7 @@ double ClosedCube_HDC1080::readTemperature(uint8_t samples, uint32_t delayPerSam
 	double sumTemperture = 0;
 	for (uint8_t i = 0; i < samples; i++)
 	{
-		temperature += readTemperature();
+		sumTemperture += readTemperature();
 		delay(delayPerSample);
 	}
 	return sumTemperture / samples;
