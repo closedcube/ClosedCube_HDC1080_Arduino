@@ -28,19 +28,26 @@ THE SOFTWARE.
 
 */
 
-#include <Wire.h>
-
 #include "ClosedCube_HDC1080.h"
 
+ClosedCube_HDC1080::ClosedCube_HDC1080() {
+	_sda = 255;
+	_scl = 255
+ }
 
-ClosedCube_HDC1080::ClosedCube_HDC1080()
-{
+ClosedCube_HDC1080::ClosedCube_HDC1080(uint8_t sda, uint8_t scl) { 
+	_sda = sda;
+	_scl = scl;
 }
-
 void ClosedCube_HDC1080::begin(uint8_t address) {
 	_address = address;
-	Wire.begin();
-
+	
+	if (_sda != 255 && _scl != 255) {
+		Wire.begin(_sda, _scl);
+	}
+	else {
+		Wire.begin();
+	}
 	setResolution(HDC1080_RESOLUTION_14BIT, HDC1080_RESOLUTION_14BIT);
 }
 
@@ -150,6 +157,7 @@ uint16_t ClosedCube_HDC1080::readData(uint8_t pointer) {
 
 	return msb << 8 | lsb;
 }
+
 
 
 

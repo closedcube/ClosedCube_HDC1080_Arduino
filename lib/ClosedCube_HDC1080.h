@@ -29,15 +29,16 @@ THE SOFTWARE.
 */
 
 #ifndef _CLOSEDCUBE_HDC1080_h
-
 #define _CLOSEDCUBE_HDC1080_h
+
 #include <Arduino.h>
+#include <Wire.h>
 
 typedef enum {
 	HDC1080_RESOLUTION_8BIT,
 	HDC1080_RESOLUTION_11BIT,
 	HDC1080_RESOLUTION_14BIT,
-} HDC1080_MeasurementResolution;
+} 
 
 typedef enum {
 	HDC1080_TEMPERATURE		= 0x00,
@@ -75,7 +76,7 @@ typedef union {
 class ClosedCube_HDC1080 {
 public:
 	ClosedCube_HDC1080();
-
+    ClosedCube_HDC1080(uint8_t sda, uint8_t scl);
 	void begin(uint8_t address);
 	uint16_t readManufacturerId(); // 0x5449 ID of Texas Instruments
 	uint16_t readDeviceId(); // 0x1050 ID of the device
@@ -90,7 +91,12 @@ public:
 	void setResolution(HDC1080_MeasurementResolution humidity, HDC1080_MeasurementResolution temperature);
 
 	double readTemperature();
+
 	double readHumidity();
+	
+	double readTemperature(uint8_t samples, uint32_t delayPerSample);
+	double readH(uint8_t samples, uint32_t delayPerSample); // short-cut for readHumidity with sampling
+	double readT(uint8_t samples, uint32_t delayPerSample); // short-cut for readTemperature with samples and delay
 
 	double readT(); // short-cut for readTemperature
 	double readH(); // short-cut for readHumidity
@@ -98,7 +104,8 @@ public:
 private:
 	uint8_t _address;
 	uint16_t readData(uint8_t pointer);
-	
+	uint8_t _sda;
+	uint8_t _scl;
 };
 
 #endif
