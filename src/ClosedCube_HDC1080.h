@@ -32,12 +32,14 @@ THE SOFTWARE.
 #define _CLOSEDCUBE_HDC1080_h
 
 #include <Arduino.h>
+#include <Wire.h>
+
 
 typedef enum {
 	HDC1080_RESOLUTION_8BIT,
 	HDC1080_RESOLUTION_11BIT,
 	HDC1080_RESOLUTION_14BIT,
-} 
+} HdC1080_MeasurementResolution;
 
 typedef enum {
 	HDC1080_TEMPERATURE		= 0x00,
@@ -95,6 +97,7 @@ public:
 	
 	double readTemperature(uint8_t samples, uint32_t delayPerSample);.
 	double readHumidity(uint8_t samples, uint32_t delayPerSample);
+	
 	double readH(uint8_t samples, uint32_t delayPerSample); // short-cut for readHumidity with sampling
 	double readT(uint8_t samples, uint32_t delayPerSample); // short-cut for readTemperature with samples and delay
 
