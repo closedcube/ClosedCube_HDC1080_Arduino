@@ -158,6 +158,29 @@ uint16_t ClosedCube_HDC1080::readData(uint8_t pointer) {
 	return msb << 8 | lsb;
 }
 
+double ClosedCube_HDC1080::readTemperature(uint8_t samples, uint32_t delayPerSample)
+{
+	double sumTemperture = 0;
+	for (uint8_t i = 0; i < samples; i++)
+	{
+		temperature += readTemperature();
+		delay(delayPerSample);
+	}
+	return sumTemperture / samples;
+	
+}
+
+double ClosedCube_HDC1080::readT(uint8_t samples, uint32_t delayPerSample)
+{
+	return readTemperature(samples, delayPerSample);
+}
+
+double ClosedCube_HDC1080::readH(uint8_t samples, uint32_t delayPerSample)
+{
+	return readHumidity(samples, delayPerSample);
+}
+
+
 
 
 
