@@ -32,7 +32,6 @@ THE SOFTWARE.
 #define _CLOSEDCUBE_HDC1080_h
 
 #include <Arduino.h>
-#include <Wire.h>
 
 typedef enum {
 	HDC1080_RESOLUTION_8BIT,
