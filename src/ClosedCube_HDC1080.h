@@ -95,7 +95,7 @@ public:
 
 	double readHumidity();
 	
-	double readTemperature(uint8_t samples, uint32_t delayPerSample);.
+	double readTemperature(uint8_t samples, uint32_t delayPerSample);
 	double readHumidity(uint8_t samples, uint32_t delayPerSample);
 	
 	double readH(uint8_t samples, uint32_t delayPerSample); // short-cut for readHumidity with sampling

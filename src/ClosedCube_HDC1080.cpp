@@ -182,16 +182,6 @@ double ClosedCube_HDC1080::readHumidity(uint8_t samples, uint32_t delayPerSample
 	return sumHumidity / samples;
 }
 
-double ClosedCube_HDC1080::readHumidity(uint8_t samples, uint32_t delayPerSample)
-{
-	double sumHumidity = 0;
-	for (uint8_t i = 0; i < samples; i++)
-	{
-		sumHumidity += readHumidity();
-		delay(delayPerSample);
-	}
-	return sumHumidity / samples;
-}
 
 double ClosedCube_HDC1080::readT(uint8_t samples, uint32_t delayPerSample)
 {
