@@ -30,10 +30,6 @@ THE SOFTWARE.
 
 #include "ClosedCube_HDC1080.h"
 
-double ClosedCube_HDC1080::readTemperature(uint8_t samples, uint32_t delayPerSample);
-double ClosedCube_HDC1080::readHumidity(uint8_t samples, uint32_t delayPerSample);
-double ClosedCube_HDC1080::readT(uint8_t samples, uint32_t delayPerSample);
-double ClosedCube_HDC1080::readH(uint8_t samples, uint32_t delayPerSample);
 
 ClosedCube_HDC1080::ClosedCube_HDC1080() {
 	_sda = 255;
@@ -48,7 +44,7 @@ void ClosedCube_HDC1080::begin(uint8_t address) {
 	_address = address;
 	
 	if (_sda != 255 && _scl != 255) {
-		Wire.begin(_sda, _scl);
+		Wire.begin(_sda, _scl, 1e5);
 	}
 	else {
 		Wire.begin();

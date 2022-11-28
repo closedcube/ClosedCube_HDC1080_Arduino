@@ -39,7 +39,7 @@ typedef enum {
 	HDC1080_RESOLUTION_8BIT,
 	HDC1080_RESOLUTION_11BIT,
 	HDC1080_RESOLUTION_14BIT,
-} HdC1080_MeasurementResolution;
+} HDC1080_MeasurementResolution;
 
 typedef enum {
 	HDC1080_TEMPERATURE		= 0x00,
