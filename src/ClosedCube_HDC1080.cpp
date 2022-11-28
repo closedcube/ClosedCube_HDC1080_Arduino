@@ -30,7 +30,6 @@ THE SOFTWARE.
 
 #include "ClosedCube_HDC1080.h"
 
-
 ClosedCube_HDC1080::ClosedCube_HDC1080() {
 	_sda = 255;
 	_scl = 255;
@@ -182,15 +181,16 @@ double ClosedCube_HDC1080::readHumidity(uint8_t samples, uint32_t delayPerSample
 	return sumHumidity / samples;
 }
 
+double ClosedCube_HDC1080::readH(uint8_t samples, uint32_t delayPerSample)
+{
+	return readHumidity(samples, delayPerSample);
+}
+
+
 
 double ClosedCube_HDC1080::readT(uint8_t samples, uint32_t delayPerSample)
 {
 	return readTemperature(samples, delayPerSample);
-}
-
-double ClosedCube_HDC1080::readH(uint8_t samples, uint32_t delayPerSample)
-{
-	return readHumidity(samples, delayPerSample);
 }
 
 
