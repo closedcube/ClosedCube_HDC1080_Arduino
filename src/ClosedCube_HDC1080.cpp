@@ -28,19 +28,26 @@ THE SOFTWARE.
 
 */
 
-#include <Wire.h>
-
 #include "ClosedCube_HDC1080.h"
 
+ClosedCube_HDC1080::ClosedCube_HDC1080() {
+	_sda = 255;
+	_scl = 255;
+ }
 
-ClosedCube_HDC1080::ClosedCube_HDC1080()
-{
+ClosedCube_HDC1080::ClosedCube_HDC1080(uint8_t sda, uint8_t scl) { 
+	_sda = sda;
+	_scl = scl;
 }
-
 void ClosedCube_HDC1080::begin(uint8_t address) {
 	_address = address;
-	Wire.begin();
-
+	
+	if (_sda != 255 && _scl != 255) {
+		Wire.begin(_sda, _scl, 1e5);
+	}
+	else {
+		Wire.begin();
+	}
 	setResolution(HDC1080_RESOLUTION_14BIT, HDC1080_RESOLUTION_14BIT);
 }
 
@@ -150,6 +157,43 @@ uint16_t ClosedCube_HDC1080::readData(uint8_t pointer) {
 
 	return msb << 8 | lsb;
 }
+
+double ClosedCube_HDC1080::readTemperature(uint8_t samples, uint32_t delayPerSample)
+{
+	double sumTemperture = 0;
+	for (uint8_t i = 0; i < samples; i++)
+	{
+		sumTemperture += readTemperature();
+		delay(delayPerSample);
+	}
+	return sumTemperture / samples;
+	
+}
+
+double ClosedCube_HDC1080::readHumidity(uint8_t samples, uint32_t delayPerSample)
+{
+	double sumHumidity = 0;
+	for(uint8_t i = 0; i < samples; i++)
+	{
+		sumHumidity += readHumidity();
+		delay(delayPerSample);
+	}
+	return sumHumidity / samples;
+}
+
+double ClosedCube_HDC1080::readH(uint8_t samples, uint32_t delayPerSample)
+{
+	return readHumidity(samples, delayPerSample);
+}
+
+
+
+double ClosedCube_HDC1080::readT(uint8_t samples, uint32_t delayPerSample)
+{
+	return readTemperature(samples, delayPerSample);
+}
+
+
 
 
 

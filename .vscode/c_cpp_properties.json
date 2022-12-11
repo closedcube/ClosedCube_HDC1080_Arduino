@@ -1,0 +1,22 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "C:/Users/ivans/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "C:/Users/ivans/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "C:/Users/ivans/.platformio/packages/toolchain-atmelavr/avr/include",
+                "C:/Users/ivans/.platformio/packages/toolchain-atmelavr/lib/gcc/avr/7.3.0/include",
+                "C:/Users/ivans/.platformio/packages/framework-arduino-avr/variants/eightanaloginputs"
+            ],
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "intelliSenseMode": "windows-msvc-x64"
+        }
+    ],
+    "version": 4
+}
